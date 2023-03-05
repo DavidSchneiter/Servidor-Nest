@@ -1,28 +1,33 @@
 import { Injectable } from '@nestjs/common';
+import ContainerDaoFactory from './Daos/Factory';
 import { CreateProductDto } from './dto/product.dto';
-import { IProduct } from './Interfaces/product.interface';
 
 @Injectable()
 export class ProductsService {
-	private products: IProduct[] = [];
-
+	private containerProduct = ContainerDaoFactory.getDao();
+	
+	
 	create(createProductDto: CreateProductDto) {
-		return 'This action adds a new product';
+		return this.containerProduct.save(createProductDto);
 	}
 
 	findAll() {
-		return `This action returns all products`;
+		return this.containerProduct.getAll();
 	}
 
 	findOne(id: number) {
-		return `This action returns a #${id} product`;
+		return this.containerProduct.getById(id);
 	}
 
-	update(id: number, updateProductDto: CreateProductDto) {
-		return `This action updates a #${id} product`;
+	update(id: number, createProductDto: CreateProductDto) {
+		return this.containerProduct.changeById(id, createProductDto);
 	}
 
 	remove(id: number) {
-		return `This action removes a #${id} product`;
+		return this.containerProduct.deleteById(id);;
+	}
+
+	removeAll() {
+		return this.containerProduct.deleteAll();
 	}
 }

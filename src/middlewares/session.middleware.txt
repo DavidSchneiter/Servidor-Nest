@@ -1,0 +1,16 @@
+// import MongoStore from "connect-mongo";
+
+// export const mongoSession = {
+//   store: MongoStore.create({
+//     mongoUrl: process.env.MONGO_DB_URI || "mongodb+srv://David28:Capocha98@cluster0.m3mu3cy.mongodb.net/test",
+//     ttl: 10,
+//     collectionName: "session",
+//     autoRemove: "native",
+//   }),
+//   secret: process.env.SECRET_KEY || "MUCHACHOS",
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: {
+//     maxAge: 3600 * 24 * 60,
+//   },
+// };
