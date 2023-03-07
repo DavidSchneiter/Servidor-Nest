@@ -17,7 +17,7 @@ export class ApiController {
 	}
 
 	@Post()
-	@Redirect('/')
+	@Redirect('/api')
 	async create(@Body() createProductDto: CreateProductDto) {
 		return await this.productsService.create(createProductDto);
 	}

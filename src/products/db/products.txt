@@ -1,14 +1,8 @@
 [
   {
-    "title": "123",
-    "price": "123",
-    "thumbnail": "123",
+    "title": "Placa de video Msi Nvidia Geforce Rtx 4090 24Gb Gaming x Trio",
+    "price": "137605000",
+    "thumbnail": "https://eclypse.com.ar/wp-content/uploads/2023/02/43C205BA-3016-43BB-A059-DBBC40F216EC.jpg",
     "id": 1
-  },
-  {
-    "title": "1234",
-    "price": "1234",
-    "thumbnail": "1234",
-    "id": 2
   }
 ]
