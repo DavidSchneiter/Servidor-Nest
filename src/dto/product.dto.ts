@@ -1,12 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
+// import { IsString, IsNumber, IsNotEmpty } from 'class-validator';
 
 export class CreateProductDto {
 	@ApiProperty()
-	id?: number;
-	@ApiProperty()
 	readonly title: string;
 	@ApiProperty()
-	readonly price: string;
+	readonly price: number;
 	@ApiProperty()
 	readonly thumbnail: string;
 }

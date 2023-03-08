@@ -11,11 +11,11 @@ import { AuthModule } from './auth/auth.module';
 import { ApiModule } from './api/api.module';
 
 @Module({
-	imports: [ConfigModule.forRoot(), ProductsModule, UserModule, AuthModule, MongooseModule.forRoot(
+	imports: [ConfigModule.forRoot(), MongooseModule.forRoot(
       process.env.MONGO_DB_URI 
-    ), ApiModule],
+    ), ProductsModule, UserModule, AuthModule, ApiModule],
 	controllers: [AppController],
-	providers: [AppService, ProductsService],
+	providers: [AppService],
 })
 // export class AppModule implements NestModule {
 //   configure(consumer: MiddlewareConsumer) {

@@ -19,8 +19,8 @@ async function bootstrap() {
 		.build()
 	const document = SwaggerModule.createDocument(app, swaggerOptions)
 	SwaggerModule.setup("swagger", app, document)
-	app.useStaticAssets(join(__dirname, '..', 'public'));
 	app.setBaseViewsDir(join(__dirname, '..', 'views'));
+	app.setViewEngine('hbs');
 	app.engine(
 	"hbs",
 	hbs({

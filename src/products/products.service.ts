@@ -1,33 +1,29 @@
 import { Injectable } from '@nestjs/common';
-import ContainerDaoFactory from './Daos/Factory';
-import { CreateProductDto } from './dto/product.dto';
+import { CreateProductDto } from '../dto/product.dto';
+import { DatabaseService } from '@app/database';
+import { IProduct } from '../Interfaces/product.interface';
 
 @Injectable()
-export class ProductsService {
-	private containerProduct = ContainerDaoFactory.getDao();
-	
-	
-	create(createProductDto: CreateProductDto) {
-		return this.containerProduct.save(createProductDto);
+export class ProductsService {	
+	 constructor(private database: DatabaseService) {}
+	 
+	async createProduct(createProductDto: CreateProductDto): Promise<IProduct> {
+		return this.database.product().create(createProductDto);
 	}
 
-	findAll() {
-		return this.containerProduct.getAll();
+	async findAllProduct() {
+		return this.database.product().getAll();
 	}
 
-	findOne(id: number) {
-		return this.containerProduct.getById(id);
+	async findOneProduct(id: string) {
+		return this.database.product().get(id);
 	}
 
-	update(id: number, createProductDto: CreateProductDto) {
-		return this.containerProduct.changeById(id, createProductDto);
+	async updateProduct(id: string, createProductDto: CreateProductDto) {
+		return this.database.product().update(id, createProductDto);
 	}
 
-	remove(id: number) {
-		return this.containerProduct.deleteById(id);;
-	}
-
-	removeAll() {
-		return this.containerProduct.deleteAll();
+	async removeProduct(id: string) {
+		return this.database.product().remove(id);;
 	}
 }
