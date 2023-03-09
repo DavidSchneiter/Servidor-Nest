@@ -1,23 +1,34 @@
+import { DatabaseService } from '@app/database';
+import { Product } from '@app/database/schema/product.schema';
+import { User } from '@app/database/schema/user.model';
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { User } from './user.model';
+import { IProduct } from 'src/Interfaces/product.interface';
+import { IUser } from 'src/Interfaces/user.interface';
+import * as mongoose from 'mongoose';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel('user') private readonly userModel: Model<User>) { }
+  constructor(private database: DatabaseService) { }
+
   async insertUser(userName: string, password: string) {
-    const username = userName.toLowerCase();
-    const newUser = new this.userModel({
-      username,
-      password,
-    });
-    await newUser.save();
-    return newUser;
+    // const products:IProduct[] = []
+    const newUser = {
+      username: userName.toLowerCase(),
+      password: password,
+      products: []
+    };
+    return this.database.user().create(newUser);
   }
   async getUser(userName: string) {
     const username = userName.toLowerCase();
-    const user = await this.userModel.findOne({ username });
-    return user;
+    return await this.database.user().findOne(username);
+  }
+
+  async getUserById(id: string, path: string) {
+    return this.database.user().getAndPopulate(id, path);
+  }
+
+  async updateUser(id: string, user: User) {
+    return this.database.user().update(id, user);
   }
 }

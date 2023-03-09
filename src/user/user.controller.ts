@@ -3,7 +3,8 @@ import { UserService } from './user.service';
 import * as bcrypt from 'bcrypt';
 import { UseGuards } from '@nestjs/common/decorators/core/use-guards.decorator';
 import { LocalAuthGuard } from 'src/auth/passport/local.authGuard';
-import { UserDto } from './dto/userDto';
+import { CreateUserDto } from '../dto/userDto';
+import { IUser } from 'src/Interfaces/user.interface';
 
 @Controller('auth')
 export class UserController {
@@ -18,23 +19,24 @@ export class UserController {
   @Redirect('/')
   @Post('/register')
   async register(
-    @Body() {username, password}: UserDto,
+    @Body() {username, password}: CreateUserDto,
     @Response() res
   ) {
     try {
       const saltOrRounds = 10;
       const hashedPassword = await bcrypt.hash(password, saltOrRounds);
-      const result = await this.usersService.insertUser(
+      const result:IUser = await this.usersService.insertUser(
         username,
         hashedPassword,
-        );
-        return {
+      );
+      return {
           msg: 'User successfully registered',
-          userId: result.id,
-          userName: result.username
+          userName: result.username,
+          userId: result._id.toString(),
         };
       } catch (error) {
-        res.render("partials/register-error")
+        // res.render("partials/register-error")
+      console.log(error)
       }
   }
 

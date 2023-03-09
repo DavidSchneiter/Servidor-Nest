@@ -13,7 +13,7 @@ import { ApiModule } from './api/api.module';
 @Module({
 	imports: [ConfigModule.forRoot(), MongooseModule.forRoot(
       process.env.MONGO_DB_URI 
-    ), ProductsModule, UserModule, AuthModule, ApiModule],
+    ), ProductsModule, AuthModule, UserModule,  ApiModule],
 	controllers: [AppController],
 	providers: [AppService],
 })
